@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:event listener="#{tabModelBean.listAll}" type="preRenderView"/>
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="form" >		
+			<p:growl id="msj" showDetail="true" />
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Model - Example..." />
+				</f:facet>
+				<f:facet name="right">
+					<p:commandButton value="New Item" icon="pi pi-plus-circle" actionListener="#{tabModelBean.newItem()}" update="form , form:pnlAdd" oncomplete="PF('Add').show()" style="width: 150px !important;"/>
+				</f:facet>		
+			</p:toolbar>	
+			<p:dataTable widgetVar="dataTableWidgetVar" id="tab" var="t" editable="true"
+				value="#{tabModelBean.tabModellist}"
+				filteredValue="#{tabModelBean.tabModellistFilter}"
+				rowsPerPageTemplate="10,20,30,40"
+				rows="10" filterEvent="enter"
+				paginatorTemplate="{RowsPerPageDropdown} Linhas {CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+				paginator="true">
+				
+				<f:facet name="{Exporters}">
+					<h:commandLink immediate="true">
+						<p:graphicImage value="/images/excell.png"
+							style="float:right !important;  margin-left:10px; margin-right:10px; max-width:30px; max-height:30px; width: auto; height: auto; border-radius: 1px;"
+							title="Excel xlsx" />
+						<p:dataExporter type="xlsxstream" target="tab" fileName="TabModelodel"/>						
+					</h:commandLink>						
+				</f:facet>
+				
+				<p:column headerText="Id" width="60" style="text-align: center;">
+					<h:outputText value="#{t.id}" />
+				</p:column>	
+				
+				<p:column headerText="Column Model" filterBy="#{t.columnmodel}" filterMatchMode="contains">
+					<h:outputText value="#{t.columnmodel}" />
+				</p:column>
+
+				<p:column headerText="-" width="40" style="text-align: center;">
+					<p:commandButton title="Select Item" icon="pi pi-pencil" actionListener="#{tabModelBean.selectItem(t)}" update="form , form:pnlAdd" 
+					oncomplete="PF('Add').show()" />
+				</p:column>	
+				<p:column headerText="-" width="40" style="text-align: center;">
+					<p:commandButton title="Delete Item" icon="pi pi-trash" styleClass="deletButton" actionListener="#{tabModelBean.delete(t)}" 
+					update="form" oncomplete="PF('dataTableWidgetVar').filter()" />
+				</p:column>						
+							
+			</p:dataTable>
+			
+			<p:dialog header="Add new Item" widgetVar="Add" appendTo="@(form)" dynamic="true" width="600" height="160" closable="false" minimizable="false" maximizable="false"
+				resizable="false" draggable="false" position="center">
+		        <p:panel id="pnlAdd">
+					<h:panelGrid columns="3" cellpadding="3">
+						<p:outputLabel value="Column Model:" />
+						<p:inputText  size="40" placeholder="Add a new item example(*)" value="#{tabModelBean.tabModel.columnmodel}" onkeypress="if (event.keyCode == 13) { return false; }" />
+					</h:panelGrid>
+					<p:separator/>
+				</p:panel>	
+				<p:panel>
+					<h:panelGrid columns="3">
+						<p:commandButton value="Save" actionListener="#{tabModelBean.save}" action="#{tabModelBean.refreshPage}"/>
+						<p:commandButton value="Return" action="#{tabModelBean.refreshPage}" />
+					</h:panelGrid>	
+				</p:panel>
+		    </p:dialog>	
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

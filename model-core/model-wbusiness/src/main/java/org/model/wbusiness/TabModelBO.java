@@ -29,6 +29,9 @@ public class TabModelBO implements Serializable {
 		return tabModelDAO.crudUtil().buscaPorId(id);
 	}
 	public void salvar(TabModel t) throws Exception{
+		// set to Uppercase
+		t.setColumnmodel(t.getColumnmodel().toUpperCase());
+		
 		if (t.getId() == null) {
 			tabModelDAO.crudUtil().adiciona(t);
 		}else {
