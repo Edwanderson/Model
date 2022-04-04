@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/lbl_title"
+        android:layout_gravity="left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Model Example - Add"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        />
+
+    <GridLayout
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/txt_ColumnModel"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:hint="Add a new item example(*)"
+            android:imeOptions="actionNone"
+            android:textSize="18dp"
+            android:layout_margin="5dp"/>
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/save"
+            android:layout_margin="5dp"/>
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btn_return"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/backing"
+            android:layout_margin="5dp"/>
+    </GridLayout>
+
+    <ListView
+        android:id="@+id/list_ColumnModel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+
+    </LinearLayout>

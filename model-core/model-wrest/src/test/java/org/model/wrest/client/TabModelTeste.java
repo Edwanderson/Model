@@ -4,12 +4,12 @@ import org.model.domain.TabModel;
 
 public class TabModelTeste {
 //listAll
-//	public static void main(String[] args) {
-//		TabModelClient client = new TabModelClient();
-//		client.listAll().forEach(a ->{
-//			System.out.println(a.toString());
-//		});
-//	}
+	public static void main(String[] args) {
+		TabModelClient client = new TabModelClient();
+		client.listAll().forEach(a ->{
+			System.out.println(a.toString());
+		});
+	}
 
 //remover
 //	public static void main(String[] args) {
